@@ -12,11 +12,14 @@ import react_logo from "@/assets/react_logo.svg";
 import sql_logo from "@/assets/sql_logo.svg";
 
 import profile_photo from "@/assets/profile.jpeg";
-import linkedin_icon from "@/assets/linkedin_icon.svg";
 import { MdEmail } from 'react-icons/md';
-import { FaLinkedin } from "react-icons/fa";
+import { FaLinkedin, FaArrowCircleRight } from "react-icons/fa";
 import ZSkillCard from "@/components/ZSkillCard/ZSkillCard";
 import Image from 'next/image';
+import ZToggle from './components/ZToggle/ZToggle';
+
+import { useContext } from 'react';
+import { ThemeContext } from './ThemeContext';
 
 const skills = [
   { label: "C#", logo: csharp_logo, alt: "C# Logo", useLargeImage: false },
@@ -34,11 +37,17 @@ const skills = [
 
 const skillCards = skills.map(x => ZSkillCard({ ...x }))
 
+const startingYear = 2015;
+const yearsOfExperience = (new Date()).getFullYear() - startingYear;
+
+
 export default function Page() {
+  const { isDarkMode, setIsDarkMode } = useContext(ThemeContext)
+
   return (
     <>
-      <div className="p-5">
-        <div className="grid grid-cols-3 shadow-lg rounded-lg p-4 w-2/5 dark:bg-gray-700 dark:text-gray-200">
+      <div className="p-5 mb-10 grid grid-cols-5">
+        <div id="profile-card" className="col-span-3 grid grid-cols-3 shadow-lg rounded-lg p-4 dark:bg-gray-700 dark:text-gray-200">
           {/* <!-- Photo Section --> */}
           <div className="col-span-1">
             <Image src={profile_photo} alt="Profile Photo" className="rounded-full w-full h-auto" />
@@ -48,17 +57,28 @@ export default function Page() {
           <div className="col-span-2 ml-4">
             <h2 className="text-2xl font-semibold">Omar Zakaria</h2>
             <p className="text-lg">Full-Stack Software Developer</p>
+            <p className="text-lg mb-6">{yearsOfExperience}+ years of experience</p>
             {/* <p className="flex space-x-1 underline"><Image src={linkedin_icon} alt="LinkedIn logo" height="17" width="17"></Image><a href="https://www.linkedin.com/in/omar-zakaria/">LinkedIn</a></p> */}
-            <p className="text-lg flex space-x-1 underline items-center"><FaLinkedin /><a href="https://www.linkedin.com/in/omar-zakaria/">LinkedIn</a></p>
-            <p className="text-lg flex space-x-1 underline items-center"><MdEmail /><a>Email me</a></p>
+            <p className="text-lg flex items-center hover:underline cursor-pointer">
+              <FaLinkedin />
+              <a target='_blank' className="ml-2 mr-3" href="https://www.linkedin.com/in/omar-zakaria/">LinkedIn</a>
+              <FaArrowCircleRight />
+            </p>
+            <p className="text-lg flex items-center hover:underline cursor-pointer">
+              <MdEmail />
+              <a className="ml-2 mr-3">Email me</a>
+              <FaArrowCircleRight />
+            </p>
             {/* <!-- More rows of information here --> */}
           </div>
         </div>
-
+        <div className="justify-self-end col-span-2">
+          <ZToggle id="dark-mode-toggle" label="Dark Mode" checked={isDarkMode} updateFunc={() => setIsDarkMode(!isDarkMode)} />
+        </div>
       </div>
-      <div className="p-5">
-        <h2 className="text-3xl font-bold text-center">Skills</h2>
-        <div className="flex flex-wrap my-14">
+      <div id="skills-section" className="p-5">
+        <h2 className="text-3xl font-bold text-center mb-6">Skills</h2>
+        <div className="flex flex-wrap">
           {skillCards}
         </div>
       </div>

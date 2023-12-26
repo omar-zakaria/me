@@ -1,0 +1,9 @@
+/* Additional CSS */
+.toggle-circle {
+    left: 1px;
+    /* When the toggle is "on" you would add a class to move the circle to the right */
+}
+
+.toggle-circle.on {
+    transform: translateX(100%);
+}

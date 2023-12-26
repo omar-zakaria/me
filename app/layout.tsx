@@ -1,16 +1,22 @@
 'use client';
-import React from 'react';
+import React, { useContext } from 'react';
 import './assets/globals.css';
+import { useState } from 'react';
+import { ThemeContext } from './ThemeContext';
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const [isDarkMode, setIsDarkMode] = useState(true)
+
   return (
-    <html lang="en" className='dark'>
-      <head />
-      <body className='dark:bg-gray-800 dark:text-gray-200'>
-        <React.StrictMode>
-          {children}
-        </React.StrictMode>
-      </body>
-    </html>
+    <ThemeContext.Provider value={{isDarkMode, setIsDarkMode}} >
+      <html lang="en" className={isDarkMode ? 'dark' : ''}>
+        <head />
+        <body className='dark:bg-gray-800 dark:text-gray-200'>
+          <React.StrictMode>
+            {children}
+          </React.StrictMode>
+        </body>
+      </html>
+    </ThemeContext.Provider>
   );
 }
