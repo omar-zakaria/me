@@ -4,7 +4,7 @@ import './assets/globals.css';
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" className='dark:bg-gray-800 dark:text-gray-200'>
       <head />
       <body>
         <React.StrictMode>
