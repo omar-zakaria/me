@@ -16,7 +16,6 @@ const meta = {
   tags: ["autodocs"],
   // More on argTypes: https://storybook.js.org/docs/api/argtypes
   argTypes: {
-    // children: { control: "string" },
     variant: { 
       control: 'select',
       options: ['primary', 'secondary', 'warning', 'danger'] 
@@ -28,9 +27,6 @@ const meta = {
     children: {
       control: 'text'
     }
-    // size: { control: null },
-
-    //   backgroundColor: { control: 'color' },
   },
 } satisfies Meta<typeof ZButton>;
 
