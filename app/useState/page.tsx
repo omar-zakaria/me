@@ -1,5 +1,5 @@
 'use client';
-import ZButton from "@/components/zButton/zButton";
+import ZButton from "@/components/ZButton/ZButton";
 import { useState } from 'react';
 
 export default function Page() {

@@ -14,7 +14,7 @@ const ZSkillCard: React.FC<ZSkillCardProps> = ({ label, logo, alt, useLargeImage
 
   return (
     <>
-      <div className="m-3 p-3 flex flex-col w-48 h-64 justify-center items-center shadow-lg space-y-8 dark:bg-gray-700 rounded-md">
+      <div className="m-3 p-3 flex flex-col w-48 h-64 justify-center items-center shadow-lg space-y-8 dark:bg-gray-700 rounded-md bg-gray-100">
         <div className="flex justify-center items-center" style={{ width: '150px', height: '150px' }}>
           <Image width={size} height={size} src={logo} alt={alt} />
         </div>

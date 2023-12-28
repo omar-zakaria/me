@@ -10,16 +10,19 @@ import azure_logo from "@/assets/azure_logo.svg";
 import vue_logo from "@/assets/vue_logo.svg";
 import react_logo from "@/assets/react_logo.svg";
 import sql_logo from "@/assets/sql_logo.svg";
+import poly_logo from "@/assets/polymtl.png";
 
 import profile_photo from "@/assets/profile.jpeg";
 import { MdEmail } from 'react-icons/md';
 import { FaLinkedin, FaArrowCircleRight } from "react-icons/fa";
 import ZSkillCard from "@/components/ZSkillCard/ZSkillCard";
+import ZCredentialCard from './components/ZCredentialCard/ZCredentialCard';
 import Image from 'next/image';
 import ZToggle from './components/ZToggle/ZToggle';
 
 import { useContext } from 'react';
 import { ThemeContext } from './ThemeContext';
+// import ZBubbleCanvas from './components/ZBubbleCanvas/ZBubbleCanvsas';
 
 const skills = [
   { label: "C#", logo: csharp_logo, alt: "C# Logo", useLargeImage: false },
@@ -37,17 +40,25 @@ const skills = [
 
 const skillCards = skills.map(x => ZSkillCard({ ...x }))
 
+
+
 const startingYear = 2015;
 const yearsOfExperience = (new Date()).getFullYear() - startingYear;
 
 
 export default function Page() {
-  const { isDarkMode, setIsDarkMode } = useContext(ThemeContext)
+  const { isDarkMode, setIsDarkMode } = useContext(ThemeContext);
+
 
   return (
     <>
-      <div className="p-5 mb-10 grid grid-cols-5">
-        <div id="profile-card" className="col-span-3 grid grid-cols-3 shadow-lg rounded-lg p-4 dark:bg-gray-700 dark:text-gray-200">
+      <div className="p-2 grid grid-cols-6">
+        <div className="justify-self-end col-start-6">
+          <ZToggle id="dark-mode-toggle" label="Dark Mode" checked={isDarkMode} updateFunc={() => setIsDarkMode(!isDarkMode)} />
+        </div>
+      </div>
+      <div className="p-5 mb-10 grid grid-cols-6 gap-3">
+        <div id="profile-card" className="col-span-3 grid grid-cols-3 shadow-lg rounded-lg px-4 py-8 dark:bg-gray-700 bg-gray-100">
           {/* <!-- Photo Section --> */}
           <div className="col-span-1">
             <Image src={profile_photo} alt="Profile Photo" className="rounded-full w-full h-auto" />
@@ -72,8 +83,26 @@ export default function Page() {
             {/* <!-- More rows of information here --> */}
           </div>
         </div>
-        <div className="justify-self-end col-span-2">
-          <ZToggle id="dark-mode-toggle" label="Dark Mode" checked={isDarkMode} updateFunc={() => setIsDarkMode(!isDarkMode)} />
+        <div id="profile-card" className="col-span-3 grid grid-cols-3 shadow-lg rounded-lg px-4 py-8 dark:bg-gray-700 bg-gray-100">
+          <div className="col-span-3">
+            <h2 className="text-2xl font-semibold pb-2">About Me</h2>
+            Full-stack developer with 8+ years of experience in C# .NET and Javascript/Typescript. Skilled in Node.js, Vue.js, and agile methodologies. Passionate about innovation and all aspects of business. Strong communication and collaboration skills with an excellent business acumen as well as technical awareness.
+            <ul className='list-disc pl-5 pt-2'>
+              <li>Strong communication and collaboration skills</li>
+              <li>Organized and professional</li>
+              <li>Excellent business acumen as well as technical awareness</li>
+              <li>Positive, practical, and flexible character</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="credentials-section" className="p-5">
+        <h2 className="text-3xl font-bold text-center mb-6">Education and Certificates</h2>
+        <div className="flex flex-wrap">
+          <ZCredentialCard title='École Polytechnique de Montréal'  alt='No desc' logo={poly_logo} useLargeImage={true} >
+            <p className="text-lg">Génie Logiciel / Software Engineering</p>
+            <p className="text-lg">2011-2015</p>
+          </ZCredentialCard>
         </div>
       </div>
       <div id="skills-section" className="p-5">
@@ -82,6 +111,10 @@ export default function Page() {
           {skillCards}
         </div>
       </div>
+      {/* <div id="skills-section" className="p-5">
+        <h2 className="text-3xl font-bold text-center mb-6">Buzzwords map</h2>
+          <ZBubbleCanvas />
+      </div> */}
     </>
   )
 }

@@ -11,7 +11,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <ThemeContext.Provider value={{isDarkMode, setIsDarkMode}} >
       <html lang="en" className={isDarkMode ? 'dark' : ''}>
         <head />
-        <body className='dark:bg-gray-800 dark:text-gray-200'>
+        <body className='bg-gray-200 dark:bg-gray-800 dark:text-gray-200'>
           <React.StrictMode>
             {children}
           </React.StrictMode>
