@@ -11,6 +11,9 @@ import vue_logo from "@/assets/vue_logo.svg";
 import react_logo from "@/assets/react_logo.svg";
 import sql_logo from "@/assets/sql_logo.svg";
 import poly_logo from "@/assets/polymtl.png";
+import vanier_logo from "@/assets/vanier_logo.png";
+import coursera_logo from "@/assets/coursera_logo.svg";
+import aws_logo2 from "@/assets/aws_logo.jpg";
 
 import profile_photo from "@/assets/profile.jpeg";
 import { MdEmail } from 'react-icons/md';
@@ -19,8 +22,10 @@ import ZSkillCard from "@/components/ZSkillCard/ZSkillCard";
 import ZCredentialCard from './components/ZCredentialCard/ZCredentialCard';
 import Image from 'next/image';
 import ZToggle from './components/ZToggle/ZToggle';
+import ZModal from './components/ZModal/ZModal';
+import ZContactForm from './components/ZContactForm/ZContactForm';
 
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { ThemeContext } from './ThemeContext';
 // import ZBubbleCanvas from './components/ZBubbleCanvas/ZBubbleCanvsas';
 
@@ -40,15 +45,17 @@ const skills = [
 
 const skillCards = skills.map(x => ZSkillCard({ ...x }))
 
-
-
 const startingYear = 2015;
 const yearsOfExperience = (new Date()).getFullYear() - startingYear;
 
 
 export default function Page() {
+  const [isEmailMeModalOpen, setIsEmailMeModalOpen] = useState(false);
   const { isDarkMode, setIsDarkMode } = useContext(ThemeContext);
 
+  function handleEmailMeClick() {
+    setIsEmailMeModalOpen(true);
+  }
 
   return (
     <>
@@ -57,8 +64,8 @@ export default function Page() {
           <ZToggle id="dark-mode-toggle" label="Dark Mode" checked={isDarkMode} updateFunc={() => setIsDarkMode(!isDarkMode)} />
         </div>
       </div>
-      <div className="p-5 mb-10 grid grid-cols-6 gap-3">
-        <div id="profile-card" className="col-span-3 grid grid-cols-3 shadow-lg rounded-lg px-4 py-8 dark:bg-gray-700 bg-gray-100">
+      <div className="p-5 grid grid-cols-6 gap-3">
+        <div id="profile-card" className="col-span-3 grid grid-cols-3 shadow-lg h-80 rounded-lg px-4 py-8 dark:bg-gray-700 bg-gray-100">
           {/* <!-- Photo Section --> */}
           <div className="col-span-1">
             <Image src={profile_photo} alt="Profile Photo" className="rounded-full w-full h-auto" />
@@ -77,7 +84,7 @@ export default function Page() {
             </p>
             <p className="text-lg flex items-center hover:underline cursor-pointer">
               <MdEmail />
-              <a className="ml-2 mr-3">Email me</a>
+              <a className="ml-2 mr-3" onClick={handleEmailMeClick}>Email me</a>
               <FaArrowCircleRight />
             </p>
             {/* <!-- More rows of information here --> */}
@@ -96,12 +103,26 @@ export default function Page() {
           </div>
         </div>
       </div>
+
       <div id="credentials-section" className="p-5">
         <h2 className="text-3xl font-bold text-center mb-6">Education and Certificates</h2>
-        <div className="flex flex-wrap">
-          <ZCredentialCard title='École Polytechnique de Montréal'  alt='No desc' logo={poly_logo} useLargeImage={true} >
-            <p className="text-lg">Génie Logiciel / Software Engineering</p>
+        <div className="grid grid-cols-2 gap-3">
+          <ZCredentialCard title='École Polytechnique de Montréal' href="https://www.polymtl.ca/" alt='École Polytechnique logo' logo={poly_logo} useLargeImage={false} >
+            <p className="text-lg">Bachelor's in Software Engineering</p>
             <p className="text-lg">2011-2015</p>
+          </ZCredentialCard>
+          <ZCredentialCard title='Machine Learning Specialization' href="https://www.coursera.org/account/accomplishments/specialization/certificate/5RA34NUFWY3G" alt='Coursera logo' logo={coursera_logo} useLargeImage={false} >
+            <p className="text-lg">Coursera</p>
+            <p className="text-lg">Issued 2023</p>
+          </ZCredentialCard>
+          <ZCredentialCard title='Vanier College' href="https://www.vaniercollege.qc.ca/" alt='Vanier College logo' logo={vanier_logo} useLargeImage={false} >
+            <p className="text-lg">D.E.C. Pure and Applied Sciences</p>
+            <p className="text-lg">2008-2011</p>
+          </ZCredentialCard>
+          <ZCredentialCard title='AWS Certified Developer - Associate' alt='AWS logo' logo={aws_logo2} useLargeImage={false} >
+            <p className="text-lg">Amazon</p>
+            <p className="text-lg">Issued November 2023</p>
+            <p className="text-lg">Credential ID 5RA34NUFWY3G</p>
           </ZCredentialCard>
         </div>
       </div>
@@ -111,6 +132,9 @@ export default function Page() {
           {skillCards}
         </div>
       </div>
+      <ZModal open={isEmailMeModalOpen} setOpen={setIsEmailMeModalOpen} title='Contact Me'>
+        <ZContactForm />
+      </ZModal>
       {/* <div id="skills-section" className="p-5">
         <h2 className="text-3xl font-bold text-center mb-6">Buzzwords map</h2>
           <ZBubbleCanvas />
