@@ -108,7 +108,7 @@ export default function Page() {
         <h2 className="text-3xl font-bold text-center mb-6">Education and Certificates</h2>
         <div className="grid grid-cols-2 gap-3">
           <ZCredentialCard title='École Polytechnique de Montréal' href="https://www.polymtl.ca/" alt='École Polytechnique logo' logo={poly_logo} useLargeImage={false} >
-            <p className="text-lg">Bachelor's in Software Engineering</p>
+            <p className="text-lg">Bachelor&apos;s in Software Engineering</p>
             <p className="text-lg">2011-2015</p>
           </ZCredentialCard>
           <ZCredentialCard title='Machine Learning Specialization' href="https://www.coursera.org/account/accomplishments/specialization/certificate/5RA34NUFWY3G" alt='Coursera logo' logo={coursera_logo} useLargeImage={false} >
