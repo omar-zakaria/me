@@ -27,7 +27,6 @@ import ZContactForm from './components/ZContactForm/ZContactForm';
 
 import { useContext, useState } from 'react';
 import { ThemeContext } from './ThemeContext';
-// import ZBubbleCanvas from './components/ZBubbleCanvas/ZBubbleCanvsas';
 
 const skills = [
   { label: "C#", logo: csharp_logo, alt: "C# Logo", useLargeImage: false },
@@ -65,7 +64,7 @@ export default function Page() {
         </div>
       </div>
       <div className="p-5 grid grid-cols-6 gap-3">
-        <div id="profile-card" className="col-span-3 grid grid-cols-3 shadow-lg h-80 rounded-lg px-4 py-8 dark:bg-gray-700 bg-gray-100">
+        <div id="profile-card" className="col-span-3 grid grid-cols-3 shadow-lg rounded-lg px-4 py-8 dark:bg-gray-700 bg-gray-100">
           {/* <!-- Photo Section --> */}
           <div className="col-span-1">
             <Image src={profile_photo} alt="Profile Photo" className="rounded-full w-full h-auto" />
