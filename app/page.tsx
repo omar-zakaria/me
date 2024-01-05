@@ -20,7 +20,6 @@ import { MdEmail } from 'react-icons/md';
 import { FaLinkedin, FaArrowCircleRight } from "react-icons/fa";
 import ZSkillCard from "@/components/ZSkillCard/ZSkillCard";
 import ZCredentialCard from './components/ZCredentialCard/ZCredentialCard';
-import Image from 'next/image';
 import ZToggle from './components/ZToggle/ZToggle';
 import ZModal from './components/ZModal/ZModal';
 import ZContactForm from './components/ZContactForm/ZContactForm';
@@ -28,6 +27,7 @@ import ZContactForm from './components/ZContactForm/ZContactForm';
 import { useContext, useState } from 'react';
 import { ThemeContext } from './ThemeContext';
 import ZProfileCard from './components/ZProfileCard/ZProfileCard';
+import ZButton, { SizeType, VariantType } from './components/ZButton/ZButton';
 
 const skills = [
   { className: "col-span-4 sm:col-span-3 md:col-span-2 xl:col-span-1", label: "C#", logo: csharp_logo, alt: "C# Logo", useLargeImage: false },
@@ -43,7 +43,7 @@ const skills = [
   { className: "col-span-4 sm:col-span-3 md:col-span-2 xl:col-span-1", label: "SQL", logo: sql_logo, alt: "SQL Logo", useLargeImage: true },
 ]
 
-const skillCards = skills.map(x => ZSkillCard({ ...x }))
+const skillCards = skills.map((x, i) => ZSkillCard({ key: i.toString(), ...x }))
 
 const startingYear = 2015;
 const yearsOfExperience = (new Date()).getFullYear() - startingYear;
@@ -74,11 +74,9 @@ export default function Page() {
             <a target='_blank' className="ml-2 mr-3" href="https://www.linkedin.com/in/omar-zakaria/">LinkedIn</a>
             <FaArrowCircleRight />
           </p>
-          <p className="text-lg flex items-center hover:underline cursor-pointer">
-            <MdEmail />
-            <a className="ml-2 mr-3" onClick={handleEmailMeClick}>Email me</a>
-            <FaArrowCircleRight />
-          </p>
+          <div className="flex justify-center mt-8 mb-4">
+          <ZButton variant={VariantType.Secondary} size={SizeType.Large} onClick={handleEmailMeClick}><div className='flex'>&nbsp;Contact me</div></ZButton>
+          </div>
         </ZProfileCard>
         <ZProfileCard title='About Me' className='col-span-12 lg:col-span-6'>
           Full-stack developer with 8+ years of experience in C# .NET and Javascript/Typescript. Skilled in Node.js, Vue.js, and agile methodologies. Passionate about innovation and all aspects of business. Strong communication and collaboration skills with an excellent business acumen as well as technical awareness.
@@ -120,7 +118,7 @@ export default function Page() {
         </div>
       </div>
       <ZModal open={isEmailMeModalOpen} setOpen={setIsEmailMeModalOpen} title='Contact Me'>
-        <ZContactForm />
+        <ZContactForm onClose={() => setIsEmailMeModalOpen(false)} />
       </ZModal>
       {/* <div id="skills-section" className="p-5">
         <h2 className="text-3xl font-bold text-center mb-6">Buzzwords map</h2>

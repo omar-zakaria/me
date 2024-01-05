@@ -2,6 +2,7 @@
 import Image from "next/image";
 
 interface ZSkillCardProps {
+  key?: string,
   label: string,
   className: string,
   logo: string,

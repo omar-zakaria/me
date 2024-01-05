@@ -1,22 +1,22 @@
-import { Field, Form, Formik, FormikHelpers } from 'formik';
+import { Form, Formik, FormikHelpers } from 'formik';
 import * as Yup from 'yup';
 import { TextInputLiveFeedback } from './TextInputLiveFeedback';
-
+import axios from 'axios';
 interface IValues {
     firstName: string,
     lastName: string,
-    companyName: string,
+    company: string,
     email: string,
     jobTitle: string,
     message: string
 }
 
-export default function ZContactForm() {
+export default function ZContactForm({onClose}) {
 
     const validationSchema = Yup.object().shape({
         firstName: Yup.string().required('Required').min(2, 'Minimum 2 caracters').max(200, 'Maximum 200 caracters'),
         lastName: Yup.string().required('Required').min(2, 'Minimum 2 caracters').max(200, 'Maximum 200 caracters'),
-        companyName: Yup.string().notRequired().min(2, 'Minimum 2 caracters').max(200, 'Maximum 200 caracters'),
+        company: Yup.string().notRequired().min(2, 'Minimum 2 caracters').max(200, 'Maximum 200 caracters'),
         email: Yup.string().email('Invalid email').required('Email is required'),
         jobTitle: Yup.string().notRequired(),
         message: Yup.string().required().min(50, 'Message must be a minimum of 50 characters').max(1000, 'Message must not exceed 1000 characters.')
@@ -25,26 +25,41 @@ export default function ZContactForm() {
     const initialValues: IValues = {
         firstName: '',
         lastName: '',
-        companyName: '',
+        company: '',
         email: '',
         jobTitle: '',
         message: ''
     };
+
+    async function submit(values: IValues, { setSubmitting }: FormikHelpers<IValues>) {
+        try {
+            const url = 'https://ykoampk4g1.execute-api.us-east-1.amazonaws.com/default/omarzakaria-dev-contact-email';
+            const key = "x-" + "api-k" + "ey"
+            await axios.post(url, {
+                "data": values
+            },
+                {
+                    headers: {
+                        [key]: "q5RfB8dPzN8bIQO39fIpO9WzpgMcNGMK5NmTXirq",
+                        "Content-Type": "application/json"
+                    }
+                });
+                onClose();
+                setSubmitting(false);
+            } catch (ex) {
+                console.log("something happened")
+                console.error(ex)
+                setSubmitting(false);
+        }
+
+    }
 
     return (
         <>
             <Formik
                 initialValues={initialValues}
                 validationSchema={validationSchema}
-                onSubmit={(
-                    values: IValues,
-                    { setSubmitting }: FormikHelpers<IValues>
-                ) => {
-                    setTimeout(() => {
-                        alert(JSON.stringify(values, null, 2));
-                        setSubmitting(false);
-                    }, 500);
-                }}>
+                onSubmit={submit}>
                 <Form className='grid grid-cols-4 gap-3'>
                     {/* <Field
                         id="firstName"
@@ -75,8 +90,8 @@ export default function ZContactForm() {
                         className="col-span-2 text-gray-900"
                     />
                     <TextInputLiveFeedback
-                        id="companyName"
-                        name="companyName"
+                        id="company"
+                        name="company"
                         type="text"
                         label="Company Name"
                         className="col-span-2 text-gray-900"
