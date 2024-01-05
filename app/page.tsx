@@ -91,8 +91,8 @@ export default function Page() {
         </ZProfileCard>
       </div>
 
-      <div id="credentials-section" className="p-1 md:p-5">
-        <h2 className="text-3xl font-bold text-center mb-6">Education and Certificates</h2>
+      <div id="credentials-section" className="p-1 mt-8 md:mt-4 md:p-5">
+        <h2 className="text-2xl md:text-3xl font-bold text-center mb-6">Education and Certificates</h2>
         <div className="grid grid-cols-12 gap-3">
           <ZCredentialCard className="col-span-12 md:col-span-6" title='École Polytechnique de Montréal' href="https://www.polymtl.ca/" alt='École Polytechnique logo' logo={poly_logo} useLargeImage={false} >
             <p className="text-sm md:text-lg">Bachelor&apos;s in Software Engineering</p>
@@ -113,8 +113,8 @@ export default function Page() {
           </ZCredentialCard>
         </div>
       </div>
-      <div id="skills-section" className="p-1 md:p-5">
-        <h2 className="text-3xl font-bold text-center mb-6">Skills</h2>
+      <div id="skills-section" className="p-1 mt-8 md:mt-4 md:p-5">
+        <h2 className="text-2xl md:text-3xl font-bold text-center mb-6">Skills</h2>
         <div className="grid grid-cols-12 gap-3">
           {skillCards}
         </div>
