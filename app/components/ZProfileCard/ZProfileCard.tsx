@@ -3,19 +3,22 @@ import Image from 'next/image';
 
 interface ZProfileCardProps {
     title: string,
-    profileImageSrc: any,
+    image?: any,
+    className: string,
     children?: any
 }
 
-const ZProfileCard: React.FC<ZProfileCardProps> = ({ title, profileImageSrc, children }) => {
-    return (<div id="profile-card" className="col-span-3 grid grid-cols-3 shadow-lg rounded-lg px-4 py-8 dark:bg-gray-700 bg-gray-100">
+const ZProfileCard: React.FC<ZProfileCardProps> = ({ title, image, className, children }) => {
+    return (<div id="profile-card" className={`grid grid-cols-12 shadow-lg rounded-lg px-4 py-8 dark:bg-gray-700 bg-gray-100 ${className}`}>
         {/* <!-- Photo Section --> */}
-        <div className="col-span-1">
-            <Image src={profileImageSrc} alt="Profile Image" className="rounded-full w-full h-auto" />
-        </div>
+        {image &&
+            <div className="col-span-12 md:col-span-4 mb-5 md:mb-0">
+                <Image src={image} alt="Profile Image" className="rounded-full w-full h-auto" />
+            </div>
+        }
 
         {/* <!-- Information Section --> */}
-        <div className="col-span-2 ml-4">
+        <div className={`ml-4 ${image ? 'col-span-12 md:col-span-8 ' : 'col-span-12 md:col-span-12 '}`}>
             <h2 className="text-2xl font-semibold">{title}</h2>
             {children}
         </div>

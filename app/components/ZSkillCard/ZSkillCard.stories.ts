@@ -36,6 +36,7 @@ type Story = StoryObj<typeof meta>;
 
 export const light: Story = {
   args: {
+    className: "",
     label: "C#",
     logo: csharp_logo,
     alt: "C# Logo",
@@ -45,6 +46,7 @@ export const light: Story = {
 
 export const large: Story = {
   args: {
+    className: "",
     label: "Node.Js",
     logo: nodejs_logo,
     alt: "Node.Js Logo",

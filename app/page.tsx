@@ -27,19 +27,20 @@ import ZContactForm from './components/ZContactForm/ZContactForm';
 
 import { useContext, useState } from 'react';
 import { ThemeContext } from './ThemeContext';
+import ZProfileCard from './components/ZProfileCard/ZProfileCard';
 
 const skills = [
-  { label: "C#", logo: csharp_logo, alt: "C# Logo", useLargeImage: false },
-  { label: ".NET", logo: dotnet_logo, alt: ".NET Logo", useLargeImage: false },
-  { label: "Vue", logo: vue_logo, alt: "Vue Logo", useLargeImage: false },
-  { label: "React", logo: react_logo, alt: "React Logo", useLargeImage: false },
-  { label: "Node.Js", logo: nodejs_logo, alt: "Node.Js Logo", useLargeImage: true },
-  { label: "AWS", logo: aws_logo, alt: "AWS Logo", useLargeImage: true },
-  { label: "Azure", logo: azure_logo, alt: "Azure Logo", useLargeImage: false },
-  { label: "Javascript", logo: javascript_logo, alt: "Javascript Logo", useLargeImage: false },
-  { label: "Typescript", logo: typescript_logo, alt: "Typescript Logo", useLargeImage: false },
-  { label: "MongoDb", logo: mongo_logo, alt: "MongoDb Logo", useLargeImage: true },
-  { label: "SQL", logo: sql_logo, alt: "SQL Logo", useLargeImage: true },
+  { className: "col-span-4 sm:col-span-3 md:col-span-2 xl:col-span-1", label: "C#", logo: csharp_logo, alt: "C# Logo", useLargeImage: false },
+  { className: "col-span-4 sm:col-span-3 md:col-span-2 xl:col-span-1", label: ".NET", logo: dotnet_logo, alt: ".NET Logo", useLargeImage: false },
+  { className: "col-span-4 sm:col-span-3 md:col-span-2 xl:col-span-1", label: "Vue", logo: vue_logo, alt: "Vue Logo", useLargeImage: false },
+  { className: "col-span-4 sm:col-span-3 md:col-span-2 xl:col-span-1", label: "React", logo: react_logo, alt: "React Logo", useLargeImage: false },
+  { className: "col-span-4 sm:col-span-3 md:col-span-2 xl:col-span-1", label: "Node.Js", logo: nodejs_logo, alt: "Node.Js Logo", useLargeImage: true },
+  { className: "col-span-4 sm:col-span-3 md:col-span-2 xl:col-span-1", label: "AWS", logo: aws_logo, alt: "AWS Logo", useLargeImage: true },
+  { className: "col-span-4 sm:col-span-3 md:col-span-2 xl:col-span-1", label: "Azure", logo: azure_logo, alt: "Azure Logo", useLargeImage: false },
+  { className: "col-span-4 sm:col-span-3 md:col-span-2 xl:col-span-1", label: "Javascript", logo: javascript_logo, alt: "Javascript Logo", useLargeImage: false },
+  { className: "col-span-4 sm:col-span-3 md:col-span-2 xl:col-span-1", label: "Typescript", logo: typescript_logo, alt: "Typescript Logo", useLargeImage: false },
+  { className: "col-span-4 sm:col-span-3 md:col-span-2 xl:col-span-1", label: "MongoDb", logo: mongo_logo, alt: "MongoDb Logo", useLargeImage: true },
+  { className: "col-span-4 sm:col-span-3 md:col-span-2 xl:col-span-1", label: "SQL", logo: sql_logo, alt: "SQL Logo", useLargeImage: true },
 ]
 
 const skillCards = skills.map(x => ZSkillCard({ ...x }))
@@ -58,76 +59,63 @@ export default function Page() {
 
   return (
     <>
-      <div className="p-2 grid grid-cols-6">
-        <div className="justify-self-end col-start-6">
+      <div className="p-2 grid grid-cols-12">
+        <div className="justify-self-end col-start-4 col-span-10 md:col-start-10 md:col-span-2">
           <ZToggle id="dark-mode-toggle" label="Dark Mode" checked={isDarkMode} updateFunc={() => setIsDarkMode(!isDarkMode)} />
         </div>
       </div>
-      <div className="p-5 grid grid-cols-6 gap-3">
-        <div id="profile-card" className="col-span-3 grid grid-cols-3 shadow-lg rounded-lg px-4 py-8 dark:bg-gray-700 bg-gray-100">
-          {/* <!-- Photo Section --> */}
-          <div className="col-span-1">
-            <Image src={profile_photo} alt="Profile Photo" className="rounded-full w-full h-auto" />
-          </div>
-
-          {/* <!-- Information Section --> */}
-          <div className="col-span-2 ml-4">
-            <h2 className="text-2xl font-semibold">Omar Zakaria</h2>
-            <p className="text-lg">Full-Stack Software Developer</p>
-            <p className="text-lg mb-6">{yearsOfExperience}+ years of experience</p>
-            {/* <p className="flex space-x-1 underline"><Image src={linkedin_icon} alt="LinkedIn logo" height="17" width="17"></Image><a href="https://www.linkedin.com/in/omar-zakaria/">LinkedIn</a></p> */}
-            <p className="text-lg flex items-center hover:underline cursor-pointer">
-              <FaLinkedin />
-              <a target='_blank' className="ml-2 mr-3" href="https://www.linkedin.com/in/omar-zakaria/">LinkedIn</a>
-              <FaArrowCircleRight />
-            </p>
-            <p className="text-lg flex items-center hover:underline cursor-pointer">
-              <MdEmail />
-              <a className="ml-2 mr-3" onClick={handleEmailMeClick}>Email me</a>
-              <FaArrowCircleRight />
-            </p>
-            {/* <!-- More rows of information here --> */}
-          </div>
-        </div>
-        <div id="profile-card" className="col-span-3 grid grid-cols-3 shadow-lg rounded-lg px-4 py-8 dark:bg-gray-700 bg-gray-100">
-          <div className="col-span-3">
-            <h2 className="text-2xl font-semibold pb-2">About Me</h2>
-            Full-stack developer with 8+ years of experience in C# .NET and Javascript/Typescript. Skilled in Node.js, Vue.js, and agile methodologies. Passionate about innovation and all aspects of business. Strong communication and collaboration skills with an excellent business acumen as well as technical awareness.
-            <ul className='list-disc pl-5 pt-2'>
-              <li>Strong communication and collaboration skills</li>
-              <li>Organized and professional</li>
-              <li>Excellent business acumen as well as technical awareness</li>
-              <li>Positive, practical, and flexible character</li>
-            </ul>
-          </div>
-        </div>
+      <div className="p-1 md:p-5 grid grid-cols-12 gap-3">
+        <ZProfileCard title='Omar Zakaria' image={profile_photo} className='col-span-12 lg:col-span-6'>
+          <p className="text-lg">Full-Stack Software Developer</p>
+          <p className="text-lg mb-6">{yearsOfExperience}+ years of experience</p>
+          {/* <p className="flex space-x-1 underline"><Image src={linkedin_icon} alt="LinkedIn logo" height="17" width="17"></Image><a href="https://www.linkedin.com/in/omar-zakaria/">LinkedIn</a></p> */}
+          <p className="text-lg flex items-center hover:underline cursor-pointer">
+            <FaLinkedin />
+            <a target='_blank' className="ml-2 mr-3" href="https://www.linkedin.com/in/omar-zakaria/">LinkedIn</a>
+            <FaArrowCircleRight />
+          </p>
+          <p className="text-lg flex items-center hover:underline cursor-pointer">
+            <MdEmail />
+            <a className="ml-2 mr-3" onClick={handleEmailMeClick}>Email me</a>
+            <FaArrowCircleRight />
+          </p>
+        </ZProfileCard>
+        <ZProfileCard title='About Me' className='col-span-12 lg:col-span-6'>
+          Full-stack developer with 8+ years of experience in C# .NET and Javascript/Typescript. Skilled in Node.js, Vue.js, and agile methodologies. Passionate about innovation and all aspects of business. Strong communication and collaboration skills with an excellent business acumen as well as technical awareness.
+          <ul className='list-disc pl-5 pt-2'>
+            <li>Strong communication and collaboration skills</li>
+            <li>Organized and professional</li>
+            <li>Excellent business acumen as well as technical awareness</li>
+            <li>Positive, practical, and flexible character</li>
+          </ul>
+        </ZProfileCard>
       </div>
 
-      <div id="credentials-section" className="p-5">
+      <div id="credentials-section" className="p-1 md:p-5">
         <h2 className="text-3xl font-bold text-center mb-6">Education and Certificates</h2>
-        <div className="grid grid-cols-2 gap-3">
-          <ZCredentialCard title='École Polytechnique de Montréal' href="https://www.polymtl.ca/" alt='École Polytechnique logo' logo={poly_logo} useLargeImage={false} >
-            <p className="text-lg">Bachelor&apos;s in Software Engineering</p>
-            <p className="text-lg">2011-2015</p>
+        <div className="grid grid-cols-12 gap-3">
+          <ZCredentialCard className="col-span-12 md:col-span-6" title='École Polytechnique de Montréal' href="https://www.polymtl.ca/" alt='École Polytechnique logo' logo={poly_logo} useLargeImage={false} >
+            <p className="text-sm md:text-lg">Bachelor&apos;s in Software Engineering</p>
+            <p className="text-sm md:text-lg">2011-2015</p>
           </ZCredentialCard>
-          <ZCredentialCard title='Machine Learning Specialization' href="https://www.coursera.org/account/accomplishments/specialization/certificate/5RA34NUFWY3G" alt='Coursera logo' logo={coursera_logo} useLargeImage={false} >
-            <p className="text-lg">Coursera</p>
-            <p className="text-lg">Issued 2023</p>
+          <ZCredentialCard className="col-span-12 md:col-span-6" title='Machine Learning Specialization' href="https://www.coursera.org/account/accomplishments/specialization/certificate/5RA34NUFWY3G" alt='Coursera logo' logo={coursera_logo} useLargeImage={false} >
+            <p className="md:text-lg">Coursera</p>
+            <p className="md:text-lg">Issued 2023</p>
           </ZCredentialCard>
-          <ZCredentialCard title='Vanier College' href="https://www.vaniercollege.qc.ca/" alt='Vanier College logo' logo={vanier_logo} useLargeImage={false} >
-            <p className="text-lg">D.E.C. Pure and Applied Sciences</p>
-            <p className="text-lg">2008-2011</p>
+          <ZCredentialCard className="col-span-12 md:col-span-6" title='Vanier College' href="https://www.vaniercollege.qc.ca/" alt='Vanier College logo' logo={vanier_logo} useLargeImage={false} >
+            <p className="md:text-lg">D.E.C. Pure and Applied Sciences</p>
+            <p className="md:text-lg">2008-2011</p>
           </ZCredentialCard>
-          <ZCredentialCard title='AWS Certified Developer - Associate' alt='AWS logo' logo={aws_logo2} useLargeImage={false} >
-            <p className="text-lg">Amazon</p>
-            <p className="text-lg">Issued November 2023</p>
-            <p className="text-lg">Credential ID 5RA34NUFWY3G</p>
+          <ZCredentialCard className="col-span-12 md:col-span-6" title='AWS Certified Developer Associate' alt='AWS logo' logo={aws_logo2} useLargeImage={false} >
+            <p className="md:text-lg">Amazon</p>
+            <p className="text-sm md:text-lg">Issued November 2023</p>
+            <p className="text-sm md:text-lg">Credential ID 5RA34NUFWY3G</p>
           </ZCredentialCard>
         </div>
       </div>
-      <div id="skills-section" className="p-5">
+      <div id="skills-section" className="p-1 md:p-5">
         <h2 className="text-3xl font-bold text-center mb-6">Skills</h2>
-        <div className="flex flex-wrap">
+        <div className="grid grid-cols-12 gap-3">
           {skillCards}
         </div>
       </div>
